@@ -1,0 +1,9 @@
+{
+  "gapi": {
+    "modules": "auth2",
+    "auth2": {
+      "clientId": "880851618358-8kp448at6lc95120a3euc7c03q005pb3.apps.googleusercontent.com",
+      "scope": "profile"
+    }
+  }
+}
