@@ -3,11 +3,14 @@ import React from "react";
 import { Route, Redirect, Switch, withRouter } from "react-router-dom";
 import config from "../../data/config";
 import RoutePaths from "../../enum/RoutePaths";
-import { AuthContext } from "../AuthContext";
 import style from "./App.module.scss";
 
+import { AuthContext } from "../AuthContext";
+import Header from "../Header";
+
 // Pages
-import Home from "../Home";
+import Calendar from "../Calendar";
+import CalenderSelection from "../CalenderSelection";
 import Login from "../Login";
 
 class App extends React.Component {
@@ -20,12 +23,14 @@ class App extends React.Component {
   }
 
   onGapiLoaded = async () => {
-    const auth2 = await gapi.auth2.init({
-      client_id: config.gapi.auth2.clientId,
-      scope: config.gapi.auth2.scope
+    await gapi.client.init({
+      apiKey: config.gapi.apiKey,
+      clientId: config.gapi.clientId,
+      discoveryDocs: config.gapi.discoveryDocs,
+      scope: config.gapi.scopes.join(" ")
     });
 
-    this.props.handleAuth2Init(auth2);
+    this.props.handleAuth2Init(gapi.auth2.getAuthInstance());
 
     this.setState({
       gapiLoaded: true
@@ -37,15 +42,17 @@ class App extends React.Component {
       return "";
     }
 
-    if (
-      this.props.location.pathname !== RoutePaths.LOGIN &&
-      !this.props.auth2.isSignedIn.get()
-    ) {
+    const isSignedIn = this.props.auth2.isSignedIn.get();
+    const isLoginPage = this.props.location.pathname !== RoutePaths.LOGIN;
+
+    if (!isSignedIn && isLoginPage) {
       return <Redirect to={RoutePaths.LOGIN} />;
     }
 
     return (
       <div className={style.App}>
+        <Header />
+
         <AuthContext.Consumer>
           {context => (
             <Switch>
@@ -54,7 +61,16 @@ class App extends React.Component {
                 path={RoutePaths.LOGIN}
                 render={() => <Login {...context} />}
               />
-              <Route render={() => <Home {...context} />} />
+
+              <Route
+                exact
+                path={RoutePaths.CALENDAR_SELECTION}
+                component={CalenderSelection}
+              />
+
+              <Route exact path={RoutePaths.CALENDAR} component={Calendar} />
+
+              <Redirect to={RoutePaths.CALENDAR_SELECTION} />
             </Switch>
           )}
         </AuthContext.Consumer>

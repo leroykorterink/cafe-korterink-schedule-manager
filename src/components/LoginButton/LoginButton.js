@@ -21,7 +21,11 @@ class LoginButton extends React.Component {
     const isSignedIn = this.props.auth2.isSignedIn.get();
 
     const Component = ({ children, ...props }) => (
-      <button {...props} onClick={this.handleClick}>
+      <button
+        {...props}
+        className={this.props.className}
+        onClick={this.handleClick}
+      >
         {children}
       </button>
     );

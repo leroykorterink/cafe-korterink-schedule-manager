@@ -5,6 +5,7 @@ import App from "./components/App";
 import AuthContext from "./components/AuthContext";
 import * as serviceWorker from "./serviceWorker";
 
+import "./util/normalize.scss";
 import "./index.scss";
 
 const bootstrap = (

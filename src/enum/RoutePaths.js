@@ -1,5 +1,7 @@
 const RoutePaths = {
   HOME: "/",
+  CALENDAR_SELECTION: "/calendars",
+  CALENDAR: "/calendars/:calendarId",
   LOGIN: "/login"
 };
 
