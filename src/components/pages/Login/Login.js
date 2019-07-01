@@ -1,6 +1,6 @@
 import React from "react";
 import { Redirect, withRouter } from "react-router-dom";
-import { LoginSuccessPath } from "../../enum/RoutePaths";
+import { LoginSuccessPath } from "../../../enum/RoutePaths";
 
 const Login = props => {
   if (props.auth2.isSignedIn.get()) {

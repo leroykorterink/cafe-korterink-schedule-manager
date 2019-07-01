@@ -1,8 +1,8 @@
 /* global gapi */
 import React from "react";
 import { Link } from "react-router-dom";
-import RoutePaths from "../../enum/RoutePaths";
-import createPath from "../../util/createPath";
+import RoutePaths from "../../../enum/RoutePaths";
+import createPath from "../../../util/createPath";
 
 class CalenderSelection extends React.Component {
   state = {
@@ -32,7 +32,7 @@ class CalenderSelection extends React.Component {
     const { isLoading, calendarList } = this.state;
 
     if (isLoading) {
-      return <div>Kalenders aans het laden</div>;
+      return <div>Kalenders aan het laden</div>;
     }
 
     return <div>{calendarList.map(this.renderListItem)}</div>;

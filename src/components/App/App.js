@@ -9,9 +9,9 @@ import { AuthContext } from "../AuthContext";
 import Header from "../Header";
 
 // Pages
-import Calendar from "../Calendar";
-import CalenderSelection from "../CalenderSelection";
-import Login from "../Login";
+import Calendar from "../pages/Calendar";
+import CalenderSelection from "../pages/CalenderSelection";
+import Login from "../pages/Login";
 
 class App extends React.Component {
   state = {
