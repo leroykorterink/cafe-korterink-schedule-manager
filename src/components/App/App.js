@@ -6,6 +6,7 @@ import RoutePaths from "../../enum/RoutePaths";
 import style from "./App.module.scss";
 
 import { AuthContext } from "../AuthContext";
+import ColorContext from "../ColorContext";
 import Header from "../Header";
 
 // Pages
@@ -50,31 +51,33 @@ class App extends React.Component {
     }
 
     return (
-      <div className={style.App}>
-        <Header />
+      <ColorContext>
+        <div className={style.App}>
+          <Header />
 
-        <AuthContext.Consumer>
-          {context => (
-            <Switch>
-              <Route
-                exact
-                path={RoutePaths.LOGIN}
-                render={() => <Login {...context} />}
-              />
+          <AuthContext.Consumer>
+            {context => (
+              <Switch>
+                <Route
+                  exact
+                  path={RoutePaths.LOGIN}
+                  render={() => <Login {...context} />}
+                />
 
-              <Route
-                exact
-                path={RoutePaths.CALENDAR_SELECTION}
-                component={CalenderSelection}
-              />
+                <Route
+                  exact
+                  path={RoutePaths.CALENDAR_SELECTION}
+                  component={CalenderSelection}
+                />
 
-              <Route exact path={RoutePaths.CALENDAR} component={Calendar} />
+                <Route exact path={RoutePaths.CALENDAR} component={Calendar} />
 
-              <Redirect to={RoutePaths.CALENDAR_SELECTION} />
-            </Switch>
-          )}
-        </AuthContext.Consumer>
-      </div>
+                <Redirect to={RoutePaths.CALENDAR_SELECTION} />
+              </Switch>
+            )}
+          </AuthContext.Consumer>
+        </div>
+      </ColorContext>
     );
   }
 }

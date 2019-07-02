@@ -4,31 +4,43 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import RoutePaths from "../../../enum/RoutePaths";
 import QueryFilterKeys from "../../../enum/QueryFilterKeys";
-import getValuesFromFormElement from "../../../util/getValuesFromFormElement";
 import DateFilter from "../../DateFilter";
 import EventList from "../../EventList";
 import OverviewOptions from "../../OverviewOptions";
+import TextFilter from "../../TextFilter";
+import style from "./Calendar.module.scss";
 
 const endOfDay = "T23:59:59.999Z";
 const startOfDay = "T00:00:00.000Z";
 
 class Calendar extends React.Component {
   state = {
-    isLoading: false,
+    isLoading: true,
     events: []
   };
 
-  async componentDidMount() {
+  get query() {
     const { location } = this.props;
 
     const searchParams = new URLSearchParams(location.search);
 
-    const query = {
-      timeMax: searchParams.get(QueryFilterKeys.TIME_MAX),
-      timeMin: searchParams.get(QueryFilterKeys.TIME_MIN)
+    return {
+      [QueryFilterKeys.TIME_MAX]: searchParams.get(QueryFilterKeys.TIME_MAX),
+      [QueryFilterKeys.TIME_MIN]: searchParams.get(QueryFilterKeys.TIME_MIN),
+      [QueryFilterKeys.SEARCH]: searchParams.get(QueryFilterKeys.SEARCH)
     };
+  }
 
-    this.fetchCalenderEvents(query);
+  async componentDidMount() {
+    this.fetchCalenderEvents(this.query);
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.location.search === this.props.location.search) {
+      return;
+    }
+
+    this.fetchCalenderEvents(this.query);
   }
 
   fetchCalenderEvents = async (query = {}) => {
@@ -58,8 +70,6 @@ class Calendar extends React.Component {
 
     const response = await eventsPromise.catch(this.handleFetchEventError);
 
-    console.log(response.result.items);
-
     this.setState({
       isLoading: false,
       events: response.result.items
@@ -75,23 +85,22 @@ class Calendar extends React.Component {
     throw error;
   };
 
-  handleSubmit = e => {
-    e.preventDefault();
-
-    this.fetchCalenderEvents(getValuesFromFormElement(e.target));
-  };
-
   render() {
-    const { events } = this.state;
+    const { events, isLoading } = this.state;
+
+    if (isLoading) {
+      return "Loading data";
+    }
 
     return (
-      <div>
-        <OverviewOptions onSubmit={this.handleSubmit}>
+      <div className={style.Calendar}>
+        <OverviewOptions backLink={RoutePaths.CALENDAR_SELECTION}>
           <DateFilter name={QueryFilterKeys.TIME_MIN} />
           <DateFilter name={QueryFilterKeys.TIME_MAX} />
+          <TextFilter name={QueryFilterKeys.SEARCH} />
         </OverviewOptions>
 
-        <EventList events={events} />
+        <EventList className={style.EventList} events={events} />
       </div>
     );
   }
