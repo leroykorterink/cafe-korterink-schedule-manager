@@ -1,7 +1,17 @@
 .Calendar {
   padding: 0 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.OverviewOptions {
+  margin: 4rem 0;
 }
 
 .EventList {
-  margin-top: 2rem;
+  margin-bottom: 4rem;
+
+  @media print {
+    margin-bottom: 0;
+  }
 }

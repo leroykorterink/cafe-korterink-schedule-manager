@@ -1,15 +1,16 @@
+import classNames from "classnames";
 import PropTypes from "prop-types";
 import React from "react";
-import { Link } from "react-router-dom";
+import Button from "../general/Button";
 import style from "./OverviewOptions.module.scss";
 
-const OverviewOptions = ({ children, backLink }) => (
-  <div className={style.OverviewOptions}>
+const OverviewOptions = ({ children, className, backLink }) => (
+  <div className={classNames(style.OverviewOptions, className)}>
     <div>{children}</div>
 
-    <Link className={style.right} to={backLink}>
+    <Button.Hollow small className={style.right} to={backLink}>
       Terug naar overzicht
-    </Link>
+    </Button.Hollow>
   </div>
 );
 

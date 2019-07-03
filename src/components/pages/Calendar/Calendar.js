@@ -88,19 +88,22 @@ class Calendar extends React.Component {
   render() {
     const { events, isLoading } = this.state;
 
-    if (isLoading) {
-      return "Loading data";
-    }
-
     return (
       <div className={style.Calendar}>
-        <OverviewOptions backLink={RoutePaths.CALENDAR_SELECTION}>
+        <OverviewOptions
+          backLink={RoutePaths.CALENDAR_SELECTION}
+          className={style.OverviewOptions}
+        >
           <DateFilter name={QueryFilterKeys.TIME_MIN} />
           <DateFilter name={QueryFilterKeys.TIME_MAX} />
           <TextFilter name={QueryFilterKeys.SEARCH} />
         </OverviewOptions>
 
-        <EventList className={style.EventList} events={events} />
+        <EventList
+          className={style.EventList}
+          events={events}
+          isLoading={isLoading}
+        />
       </div>
     );
   }

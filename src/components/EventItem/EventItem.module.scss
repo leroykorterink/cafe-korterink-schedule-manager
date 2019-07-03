@@ -1,0 +1,91 @@
+@import "../../data/colors";
+
+.Badge {
+  display: inline-block;
+  width: 2ex;
+  padding-bottom: 2ex;
+  border-radius: 0.75ex;
+  background-color: #ccc;
+  transform: rotate(45deg);
+}
+
+.EventItem {
+  display: flex;
+  padding: 2rem 3rem;
+  font-size: 1.4rem;
+  border-top: 2px solid $colorTileBorder;
+  color: $colorCopy;
+  transition: 0.2s ease-out all;
+
+  @media print {
+    padding: 1rem 3rem;
+  }
+
+  &:hover {
+    background: $colorTileHoverBackground;
+  }
+
+  .row {
+    display: flex;
+
+    &:not(:last-child) {
+      margin-bottom: 0.5rem;
+    }
+  }
+
+  .column:not(:first-child) {
+    margin-left: 2rem;
+  }
+
+  .eventDetails {
+    width: 100%;
+
+    @media print {
+      margin-left: 0 !important;
+    }
+  }
+
+  .badge {
+    font-size: 1.5rem;
+
+    @media print {
+      display: none;
+    }
+  }
+
+  .summary {
+    position: relative;
+    font-size: 1em;
+    font-weight: bold;
+    color: currentColor;
+    text-decoration: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    span {
+      display: inline-block;
+      position: relative;
+    }
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  .date {
+    color: $colorCopyMuted;
+  }
+
+  .timeInformation {
+    display: flex;
+    margin-left: auto;
+    color: $colorCopyMuted;
+
+    .duration {
+      font-weight: bold;
+      margin-left: 2rem;
+      color: $colorCopy;
+    }
+  }
+}

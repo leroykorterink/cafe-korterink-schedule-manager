@@ -1,0 +1,59 @@
+@import "../../../data/colors";
+
+.Button {
+  border: none;
+  background: none;
+  padding: 0;
+  font-size: 1.3rem;
+  color: $buttonColor;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+}
+
+.Hollow,
+.Solid {
+  padding: 2ex 8ex;
+  font-weight: bold;
+  border-radius: 3ex;
+  transition: all 0.2s ease-in-out;
+
+  &:hover {
+    text-decoration: none;
+  }
+
+  &.small {
+    padding: 1.5ex 3ex;
+  }
+}
+
+.Hollow {
+  border: 1px solid $hollowButtonBorderColor;
+  background: $hollowButtonBackground;
+  color: $hollowButtonColor;
+
+  &:hover {
+    border-color: $hollowButtonHoverBorderColor;
+    color: $hollowButtonHoverColor;
+  }
+}
+
+.Solid {
+  background: $solidButtonBackground;
+  color: $solidButtonColor;
+
+  &:hover {
+    background: $solidButtonHoverBackground;
+    color: $solidButtonHoverColor;
+  }
+}

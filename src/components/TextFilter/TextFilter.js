@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import KeyNames from "../../enum/KeyNames";
 import updateSearchParameters from "../../util/updateSearchParameters";
 
 class SearchFilter extends React.Component {
@@ -35,6 +36,14 @@ class SearchFilter extends React.Component {
     );
   };
 
+  handleKeyDown = e => {
+    if (e.key !== KeyNames.ENTER) {
+      return;
+    }
+
+    e.target.blur();
+  };
+
   render() {
     const { name } = this.props;
     const { value } = this.state;
@@ -45,6 +54,7 @@ class SearchFilter extends React.Component {
         defaultValue={value}
         name={name}
         onBlur={this.handleBlur}
+        onKeyDown={this.handleKeyDown}
       />
     );
   }

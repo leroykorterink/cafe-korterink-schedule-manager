@@ -1,6 +1,7 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
 import { LoginSuccessPath, LogoutSuccessPath } from "../../enum/RoutePaths";
+import Button from "../general/Button";
 
 class LoginButton extends React.Component {
   handleClick = async () => {
@@ -21,13 +22,13 @@ class LoginButton extends React.Component {
     const isSignedIn = this.props.auth2.isSignedIn.get();
 
     const Component = ({ children, ...props }) => (
-      <button
+      <Button
         {...props}
         className={this.props.className}
         onClick={this.handleClick}
       >
         {children}
-      </button>
+      </Button>
     );
 
     if (isSignedIn) {

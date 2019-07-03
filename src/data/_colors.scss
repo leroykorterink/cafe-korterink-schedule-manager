@@ -1,0 +1,29 @@
+// Colors
+$colorWhite: #ffffff;
+$colorLightGrey: #eeeeee;
+$colorBlack: #292929;
+$colorRed: rgb(220, 33, 39);
+
+// Tiles
+$colorTileBorder: #f6f6f6;
+$colorTileBackground: rgba(32, 33, 36, 0.015);
+$colorTileHoverBorder: darken($colorTileBorder, 5%);
+$colorTileHoverBackground: rgba(32, 33, 36, 0.03);
+
+// Copy
+$colorCopy: #292929;
+$colorCopyMuted: #888888;
+
+// Buttons
+$buttonColor: $colorRed;
+
+$hollowButtonBorderColor: $buttonColor;
+$hollowButtonColor: $buttonColor;
+$hollowButtonBackground: $colorWhite;
+$hollowButtonHoverBorderColor: darken($hollowButtonBorderColor, 7.5%);
+$hollowButtonHoverColor: $hollowButtonColor;
+
+$solidButtonBackground: $buttonColor;
+$solidButtonColor: $colorWhite;
+$solidButtonHoverBackground: darken($solidButtonBackground, 7.5%);
+$solidButtonHoverColor: $solidButtonColor;

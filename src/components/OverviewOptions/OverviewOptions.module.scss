@@ -1,5 +1,9 @@
 .OverviewOptions {
   display: flex;
+
+  @media print {
+    display: none;
+  }
 }
 
 .right {

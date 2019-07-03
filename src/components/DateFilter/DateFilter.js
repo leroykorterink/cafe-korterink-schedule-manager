@@ -1,5 +1,6 @@
 import React from "react";
 import { withRouter } from "react-router-dom";
+import KeyNames from "../../enum/KeyNames";
 import updateSearchParameters from "../../util/updateSearchParameters";
 
 class DateFilter extends React.Component {
@@ -35,6 +36,14 @@ class DateFilter extends React.Component {
     );
   };
 
+  handleKeyDown = e => {
+    if (e.key !== KeyNames.ENTER) {
+      return;
+    }
+
+    e.target.blur();
+  };
+
   render() {
     const { name } = this.props;
     const { value } = this.state;
@@ -45,6 +54,7 @@ class DateFilter extends React.Component {
         name={name}
         value={value}
         onChange={this.handleChange}
+        onKeyDown={this.handleKeyDown}
       />
     );
   }

@@ -1,11 +1,18 @@
+@import "../../data/colors";
+
 .Header {
-  display: flex;
-  padding: 1rem 0;
+  background: $colorLightGrey;
+
+  @media print {
+    display: none;
+  }
 }
 
-.logo,
-.loginButton {
-  margin: 0 1rem;
+.wrapper {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 1rem 0;
 }
 
 .loginButton {
