@@ -2,13 +2,19 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import KeyNames from "../../enum/KeyNames";
 import updateSearchParameters from "../../util/updateSearchParameters";
+import Input from "../general/Input";
 
-class DateFilter extends React.Component {
+class TextFilter extends React.Component {
   constructor(props) {
     super(props);
 
+    const defaultValue =
+      new URLSearchParams(window.location.search).get(props.name) ||
+      props.defaultValue ||
+      "";
+
     this.state = {
-      value: new URLSearchParams(window.location.search).get(props.name) || ""
+      value: defaultValue
     };
 
     this.updateSearchQuery();
@@ -27,7 +33,7 @@ class DateFilter extends React.Component {
     history.replace({ search: newPath.search });
   }
 
-  handleChange = e => {
+  handleBlur = e => {
     this.setState(
       {
         value: e.target.value
@@ -45,19 +51,18 @@ class DateFilter extends React.Component {
   };
 
   render() {
-    const { name } = this.props;
+    const { history, location, match, staticContext, ...props } = this.props;
     const { value } = this.state;
 
     return (
-      <input
-        type="date"
-        name={name}
-        value={value}
-        onChange={this.handleChange}
+      <Input
+        {...props}
+        defaultValue={value}
+        onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
       />
     );
   }
 }
 
-export default withRouter(DateFilter);
+export default withRouter(TextFilter);

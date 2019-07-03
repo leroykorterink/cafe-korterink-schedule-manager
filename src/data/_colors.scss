@@ -1,6 +1,6 @@
 // Colors
 $colorWhite: #ffffff;
-$colorLightGrey: #eeeeee;
+$colorLightGrey: #888888;
 $colorBlack: #292929;
 $colorRed: rgb(220, 33, 39);
 
@@ -11,8 +11,14 @@ $colorTileHoverBorder: darken($colorTileBorder, 5%);
 $colorTileHoverBackground: rgba(32, 33, 36, 0.03);
 
 // Copy
-$colorCopy: #292929;
-$colorCopyMuted: #888888;
+$colorCopy: $colorBlack;
+$colorCopyMuted: $colorLightGrey;
+
+// Input
+$colorInput: $colorCopy;
+$colorInputBorder: darken($colorTileBorder, 10%);
+$colorInputBorderActive: $colorRed;
+$colorInputBackground: $colorTileBackground;
 
 // Buttons
 $buttonColor: $colorRed;

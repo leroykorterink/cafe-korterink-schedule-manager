@@ -23,6 +23,16 @@ const EventList = ({ className, events }) => {
 
   return (
     <div className={classNames(className, style.EventList)}>
+      <div className={style.listInformation}>
+        <div>
+          Momenten: <span>{events.length}</span>
+        </div>
+
+        <div className={style.durationSum}>
+          <span>Totaal</span> <strong>{getDurationString(durationSum)}</strong>
+        </div>
+      </div>
+
       {events.length ? (
         <ColorContext.Consumer>
           {({ getEventColor }) => (
@@ -36,12 +46,8 @@ const EventList = ({ className, events }) => {
           )}
         </ColorContext.Consumer>
       ) : (
-        <div class={style.fallbackMessage}>Geen momenten gevonden</div>
+        <div className={style.fallbackMessage}>Geen momenten gevonden</div>
       )}
-
-      <div className={style.durationSum}>
-        <span>Totaal</span> <strong>{getDurationString(durationSum)}</strong>
-      </div>
     </div>
   );
 };

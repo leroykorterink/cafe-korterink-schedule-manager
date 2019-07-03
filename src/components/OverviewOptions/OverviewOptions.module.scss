@@ -1,9 +1,23 @@
 .OverviewOptions {
-  display: flex;
-
   @media print {
     display: none;
   }
+}
+
+.actions,
+.filters {
+  display: flex;
+  justify-content: space-between;
+}
+
+.actions {
+  margin-bottom: 3rem;
+}
+
+.title {
+  margin: 0;
+  line-height: 1;
+  font-size: 3.2rem;
 }
 
 .right {

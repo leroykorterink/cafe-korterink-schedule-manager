@@ -4,12 +4,12 @@ import { Link } from "react-router-dom";
 import style from "./Button.module.scss";
 
 const Button = ({ children, small, ...props }) => {
-  let defaultAttributes = {};
+  let attributes = {};
   let Component = "button";
 
   if (props.href) {
     Component = "a";
-    defaultAttributes.type = "_blank";
+    attributes.type = "_blank";
   }
 
   if (props.to) {
@@ -21,7 +21,7 @@ const Button = ({ children, small, ...props }) => {
   });
 
   return (
-    <Component {...defaultAttributes} {...props} className={classname}>
+    <Component {...attributes} {...props} className={classname}>
       {children}
     </Component>
   );

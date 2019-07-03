@@ -36,7 +36,7 @@ const EventItem = ({
 
         <div className={style.row}>
           <div className={style.date}>
-            {format(start.dateTime, "dddd DD MMMM YYYY")}
+            {format(startDateTime, "dddd DD MMMM YYYY")}
           </div>
 
           <div className={style.timeInformation}>

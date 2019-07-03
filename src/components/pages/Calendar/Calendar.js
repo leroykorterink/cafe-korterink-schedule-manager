@@ -4,14 +4,17 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import RoutePaths from "../../../enum/RoutePaths";
 import QueryFilterKeys from "../../../enum/QueryFilterKeys";
-import DateFilter from "../../DateFilter";
 import EventList from "../../EventList";
+import FilterInput from "../../FilterInput";
 import OverviewOptions from "../../OverviewOptions";
-import TextFilter from "../../TextFilter";
 import style from "./Calendar.module.scss";
 
 const endOfDay = "T23:59:59.999Z";
 const startOfDay = "T00:00:00.000Z";
+
+const now = Date.now();
+const endOfMonthDateTime = format(endOfMonth(now), "YYYY-MM-DD");
+const startOfMonthDateTime = format(startOfMonth(now), "YYYY-MM-DD");
 
 class Calendar extends React.Component {
   state = {
@@ -44,14 +47,8 @@ class Calendar extends React.Component {
   }
 
   fetchCalenderEvents = async (query = {}) => {
-    const now = new Date();
-
-    const timeMax =
-      query[QueryFilterKeys.TIME_MAX] || format(endOfMonth(now), "YYYY-MM-DD");
-
-    const timeMin =
-      query[QueryFilterKeys.TIME_MIN] ||
-      format(startOfMonth(now), "YYYY-MM-DD");
+    const timeMax = query[QueryFilterKeys.TIME_MAX] || endOfMonthDateTime;
+    const timeMin = query[QueryFilterKeys.TIME_MIN] || startOfMonthDateTime;
 
     const parsedQuery = {
       // Optional
@@ -93,10 +90,31 @@ class Calendar extends React.Component {
         <OverviewOptions
           backLink={RoutePaths.CALENDAR_SELECTION}
           className={style.OverviewOptions}
+          title="Kalendar"
         >
-          <DateFilter name={QueryFilterKeys.TIME_MIN} />
-          <DateFilter name={QueryFilterKeys.TIME_MAX} />
-          <TextFilter name={QueryFilterKeys.SEARCH} />
+          <span>
+            <FilterInput
+              name={QueryFilterKeys.TIME_MIN}
+              label="Vanaf"
+              type="date"
+              defaultValue={startOfMonthDateTime}
+            />
+
+            <FilterInput
+              name={QueryFilterKeys.TIME_MAX}
+              label="Tot"
+              type="date"
+              defaultValue={endOfMonthDateTime}
+            />
+          </span>
+
+          <FilterInput
+            className={style.textFilter}
+            name={QueryFilterKeys.SEARCH}
+            label="Zoeken"
+            type="text"
+            standalone
+          />
         </OverviewOptions>
 
         <EventList

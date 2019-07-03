@@ -15,10 +15,14 @@
   border-bottom: 2px solid $colorTileBorder;
 }
 
-.durationSum {
+.listInformation {
+  display: flex;
   padding: 2rem 3rem;
   font-size: 1.4rem;
-  text-align: right;
+}
+
+.durationSum {
+  margin-left: auto;
 
   span {
     margin-right: 2rem;

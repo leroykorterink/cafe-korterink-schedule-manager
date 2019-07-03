@@ -1,0 +1,61 @@
+@import "../../../data/colors";
+
+.Input {
+  display: inline-flex;
+  position: relative;
+  font-size: 1.4rem;
+  align-items: center;
+  justify-content: center;
+
+  .component {
+    padding: 0 3rem;
+    min-height: 5ex;
+    line-height: 1;
+    border: 1px solid $colorInputBorder;
+    outline: none;
+    background: $colorInputBackground;
+    color: $colorInput;
+    transition: 0.2s ease-in-out border-color;
+
+    :focus {
+      border-color: $colorInputBorderActive;
+    }
+  }
+
+  &:first-child .component {
+    border-top-left-radius: 100vw;
+    border-bottom-left-radius: 100vw;
+  }
+
+  &:last-child .component {
+    border-top-right-radius: 100vw;
+    border-bottom-right-radius: 100vw;
+  }
+
+  &.standalone .component {
+    border-radius: 100vw;
+  }
+
+  &.hasLabel {
+    .label {
+      position: absolute;
+      left: 3rem;
+      font-weight: bold;
+      transition: 0.05s ease-out all;
+    }
+
+    .component:placeholder-shown {
+      padding-top: 0.9rem;
+      padding-bottom: 0.9rem;
+    }
+
+    .component:not(:placeholder-shown) {
+      padding-top: 1.8rem;
+    }
+
+    .component:not(:placeholder-shown) + .label {
+      transform: translateY(-1.5ex);
+      font-size: 0.8em;
+    }
+  }
+}

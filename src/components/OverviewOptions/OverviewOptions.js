@@ -4,13 +4,22 @@ import React from "react";
 import Button from "../general/Button";
 import style from "./OverviewOptions.module.scss";
 
-const OverviewOptions = ({ children, className, backLink }) => (
+const OverviewOptions = ({
+  children,
+  className,
+  backLink,
+  title = "Overview"
+}) => (
   <div className={classNames(style.OverviewOptions, className)}>
-    <div>{children}</div>
+    <div className={style.actions}>
+      <h2 className={style.title}>{title}</h2>
 
-    <Button.Hollow small className={style.right} to={backLink}>
-      Terug naar overzicht
-    </Button.Hollow>
+      <Button.Hollow small className={style.right} to={backLink}>
+        Terug naar overzicht
+      </Button.Hollow>
+    </div>
+
+    <div className={style.filters}>{children}</div>
   </div>
 );
 
