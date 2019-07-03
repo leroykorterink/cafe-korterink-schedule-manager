@@ -29,7 +29,8 @@ const EventList = ({ className, events }) => {
         </div>
 
         <div className={style.durationSum}>
-          <span>Totaal</span> <strong>{getDurationString(durationSum)}</strong>
+          <span>Totaal aantal uren</span>
+          <strong>{getDurationString(durationSum)}</strong>
         </div>
       </div>
 
