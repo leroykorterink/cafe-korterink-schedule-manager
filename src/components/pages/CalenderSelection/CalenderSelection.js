@@ -2,6 +2,7 @@
 import React from "react";
 import CalendarList from "../../CalendarList";
 import style from "./CalendarSelection.module.scss";
+import ColorContext from "../../ColorContext";
 
 class CalenderSelection extends React.Component {
   state = {
@@ -11,6 +12,7 @@ class CalenderSelection extends React.Component {
 
   async componentDidMount() {
     this.setState({ isLoadig: true });
+
     const response = await gapi.client.calendar.calendarList.list();
 
     this.setState({
@@ -24,10 +26,20 @@ class CalenderSelection extends React.Component {
 
     return (
       <div className={style.CalenderSelection}>
-        <CalendarList calendars={calendars} isLoading={isLoading} />
+        <h2 className={style.title}>Calendars</h2>
+
+        <CalendarList
+          calendars={calendars}
+          className={style.CalendarList}
+          isLoading={isLoading}
+        />
       </div>
     );
   }
 }
 
-export default CalenderSelection;
+export default props => (
+  <ColorContext>
+    <CalenderSelection {...props} />
+  </ColorContext>
+);

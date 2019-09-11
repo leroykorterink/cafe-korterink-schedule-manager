@@ -1,7 +1,6 @@
 {
   "gapi": {
     "modules": "client:auth2",
-    "apiKey": "AIzaSyBdxVpTmlGcPJesyAfS3Zzgx3gFIwunoxk",
     "clientId": "880851618358-8kp448at6lc95120a3euc7c03q005pb3.apps.googleusercontent.com",
     "discoveryDocs": [
       "https://www.googleapis.com/discovery/v1/apis/calendar/v3/rest"

@@ -12,9 +12,10 @@ class ColorContextComponent extends React.Component {
     super();
 
     this.state = {
-      calendar: {},
-      event: {},
-      isLoading: true
+      calendar: null,
+      event: null,
+      isLoading: true,
+      hasLoadedColors: false
     };
 
     this.contextValue = {
@@ -24,16 +25,24 @@ class ColorContextComponent extends React.Component {
   }
 
   async componentDidMount() {
+    if (this.state.hasLoadedColors) {
+      return;
+    }
+
     const response = await gapi.client.calendar.colors.get().getPromise();
 
     this.setState({
       ...response.result,
-      isLoading: false
+      isLoading: false,
+      didLoad: true
     });
   }
 
-  getCalendarColor = colorId => this.state.calendar[colorId] || EMPTY_OBJECT;
-  getEventColor = colorId => this.state.event[colorId] || EMPTY_OBJECT;
+  getCalendarColor = colorId =>
+    this.state.calendar ? this.state.calendar[colorId] : EMPTY_OBJECT;
+
+  getEventColor = colorId =>
+    this.state.event ? this.state.event[colorId] : EMPTY_OBJECT;
 
   render() {
     const { children } = this.props;
@@ -45,7 +54,7 @@ class ColorContextComponent extends React.Component {
 
     return (
       <ColorContext.Provider value={this.contextValue}>
-        {React.cloneElement(children)}
+        {children}
       </ColorContext.Provider>
     );
   }

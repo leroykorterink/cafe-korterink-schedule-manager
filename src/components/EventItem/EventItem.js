@@ -6,7 +6,7 @@ import Button from "../general/Button";
 import style from "./EventItem.module.scss";
 
 const EventItem = ({
-  color: { background: backgroundColor },
+  color: { background: backgroundColor } = {},
   end,
   htmlLink,
   start,

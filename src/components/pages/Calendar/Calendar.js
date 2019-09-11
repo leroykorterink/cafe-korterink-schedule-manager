@@ -4,6 +4,7 @@ import React from "react";
 import { withRouter } from "react-router-dom";
 import RoutePaths from "../../../enum/RoutePaths";
 import QueryFilterKeys from "../../../enum/QueryFilterKeys";
+import ColorContext from "../../ColorContext";
 import EventList from "../../EventList";
 import FilterInput from "../../FilterInput";
 import OverviewOptions from "../../OverviewOptions";
@@ -30,7 +31,9 @@ class Calendar extends React.Component {
     return {
       [QueryFilterKeys.TIME_MAX]: searchParams.get(QueryFilterKeys.TIME_MAX),
       [QueryFilterKeys.TIME_MIN]: searchParams.get(QueryFilterKeys.TIME_MIN),
-      [QueryFilterKeys.SEARCH]: searchParams.get(QueryFilterKeys.SEARCH)
+      [QueryFilterKeys.SEARCH]: searchParams.get(QueryFilterKeys.SEARCH),
+      [QueryFilterKeys.SHOW_DELETED]: false,
+      [QueryFilterKeys.SINGLE_EVENTS]: true
     };
   }
 
@@ -57,7 +60,8 @@ class Calendar extends React.Component {
       [QueryFilterKeys.TIME_MIN]: timeMin + startOfDay,
 
       // Required
-      calendarId: this.props.match.params.calendarId
+      calendarId: this.props.match.params.calendarId,
+      orderBy: "startTime"
     };
 
     this.setState({ isLoading: true });
@@ -127,4 +131,8 @@ class Calendar extends React.Component {
   }
 }
 
-export default withRouter(Calendar);
+export default withRouter(props => (
+  <ColorContext>
+    <Calendar {...props} />
+  </ColorContext>
+));

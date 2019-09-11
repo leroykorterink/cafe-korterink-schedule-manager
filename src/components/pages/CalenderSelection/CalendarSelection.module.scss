@@ -1,2 +1,19 @@
 .CalenderSelection {
+  padding: 0 1rem;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.CalendarList {
+  margin-bottom: 4rem;
+
+  @media print {
+    margin-bottom: 0;
+  }
+}
+
+.title {
+  margin: 4rem 0;
+  line-height: 1;
+  font-size: 3.2rem;
 }

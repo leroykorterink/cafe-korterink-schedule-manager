@@ -5,8 +5,6 @@ import config from "../../data/config";
 import RoutePaths from "../../enum/RoutePaths";
 import style from "./App.module.scss";
 
-import { AuthContext } from "../AuthContext";
-import ColorContext from "../ColorContext";
 import Header from "../Header";
 
 // Pages
@@ -25,7 +23,6 @@ class App extends React.Component {
 
   onGapiLoaded = async () => {
     await gapi.client.init({
-      apiKey: config.gapi.apiKey,
       clientId: config.gapi.clientId,
       discoveryDocs: config.gapi.discoveryDocs,
       scope: config.gapi.scopes.join(" ")
@@ -44,40 +41,30 @@ class App extends React.Component {
     }
 
     const isSignedIn = this.props.auth2.isSignedIn.get();
-    const isLoginPage = this.props.location.pathname !== RoutePaths.LOGIN;
+    const isLoginRoute = this.props.location.pathname === RoutePaths.LOGIN;
 
-    if (!isSignedIn && isLoginPage) {
+    if (!isSignedIn && !isLoginRoute) {
       return <Redirect to={RoutePaths.LOGIN} />;
     }
 
     return (
-      <ColorContext>
-        <div className={style.App}>
-          <Header />
+      <div className={style.App}>
+        <Header />
 
-          <AuthContext.Consumer>
-            {context => (
-              <Switch>
-                <Route
-                  exact
-                  path={RoutePaths.LOGIN}
-                  render={() => <Login {...context} />}
-                />
+        <Switch>
+          <Route exact path={RoutePaths.LOGIN} component={Login} />
 
-                <Route
-                  exact
-                  path={RoutePaths.CALENDAR_SELECTION}
-                  component={CalenderSelection}
-                />
+          <Route
+            exact
+            path={RoutePaths.CALENDAR_SELECTION}
+            component={CalenderSelection}
+          />
 
-                <Route exact path={RoutePaths.CALENDAR} component={Calendar} />
+          <Route exact path={RoutePaths.CALENDAR} component={Calendar} />
 
-                <Redirect to={RoutePaths.CALENDAR_SELECTION} />
-              </Switch>
-            )}
-          </AuthContext.Consumer>
-        </div>
-      </ColorContext>
+          <Redirect to={RoutePaths.CALENDAR_SELECTION} />
+        </Switch>
+      </div>
     );
   }
 }
