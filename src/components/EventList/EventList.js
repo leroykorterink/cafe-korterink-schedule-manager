@@ -38,7 +38,7 @@ const EventList = ({ className, events, onToggleIgnoreEvent }) => {
     <div className={classNames(className, style.EventList)}>
       <div className={style.listInformation}>
         <div>
-          Momenten: <span>{countActiveEvents(events)}</span>
+          {countActiveEvents(events)} van {events.length} momenten geselecteerd
         </div>
 
         <div className={style.durationSum}>

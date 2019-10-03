@@ -2,7 +2,7 @@ import classNames from "classnames";
 import React from "react";
 import style from "./Input.module.scss";
 
-const Input = ({ label, standalone, type, ...props }) => {
+const Input = ({ label, standalone, type, suggestions, ...props }) => {
   let Component = "input";
 
   const attributes = {};
@@ -25,12 +25,21 @@ const Input = ({ label, standalone, type, ...props }) => {
         {...props}
         placeholder=" "
         id={props.name}
+        list={props.name + "-suggestions"}
         className={style.component}
       />
 
       <label htmlFor={props.name} className={style.label}>
         {label}
       </label>
+
+      {suggestions && (
+        <datalist id={props.name + "-suggestions"}>
+          {suggestions.map(suggestion => (
+            <option value={suggestion} key={suggestion} />
+          ))}
+        </datalist>
+      )}
     </div>
   );
 };

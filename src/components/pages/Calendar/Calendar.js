@@ -2,6 +2,7 @@
 import { format, endOfMonth, startOfMonth } from "date-fns";
 import React from "react";
 import { withRouter } from "react-router-dom";
+import config from "../../../data/config";
 import RoutePaths from "../../../enum/RoutePaths";
 import QueryFilterKeys from "../../../enum/QueryFilterKeys";
 import ColorContext from "../../ColorContext";
@@ -133,6 +134,7 @@ class Calendar extends React.Component {
             name={QueryFilterKeys.SEARCH}
             label="Zoeken"
             type="text"
+            suggestions={config.employeeSuggestions}
             standalone
           />
         </OverviewOptions>

@@ -1,6 +1,6 @@
 import classNames from "classnames";
 import { differenceInMinutes, format } from "date-fns";
-import React, { Suspense } from "react";
+import React from "react";
 import getDurationString from "../../util/getDurationString";
 import Button from "../general/Button";
 import Icon from "../general/Icon";
