@@ -8,7 +8,11 @@ import style from "./EventList.module.scss";
 
 const sumEventDurations = events =>
   events.reduce((accumulator, event) => {
-    const { end, start } = event;
+    const { end, start, ignoreEvent } = event;
+
+    if (ignoreEvent) {
+      return accumulator;
+    }
 
     const startDateTime = start.dateTime || start.date;
     const endDateTime = end.dateTime || end.date;
@@ -18,14 +22,23 @@ const sumEventDurations = events =>
     return accumulator + eventDuration;
   }, 0);
 
-const EventList = ({ className, events }) => {
+const countActiveEvents = events =>
+  events.reduce((accumulator, currentValue) => {
+    if (currentValue.ignoreEvent) {
+      return accumulator;
+    }
+
+    return accumulator + 1;
+  }, 0);
+
+const EventList = ({ className, events, onToggleIgnoreEvent }) => {
   const durationSum = sumEventDurations(events);
 
   return (
     <div className={classNames(className, style.EventList)}>
       <div className={style.listInformation}>
         <div>
-          Momenten: <span>{events.length}</span>
+          Momenten: <span>{countActiveEvents(events)}</span>
         </div>
 
         <div className={style.durationSum}>
@@ -40,7 +53,11 @@ const EventList = ({ className, events }) => {
             <ul className={style.list}>
               {events.map(event => (
                 <li key={event.id}>
-                  <EventItem {...event} color={getEventColor(event.colorId)} />
+                  <EventItem
+                    {...event}
+                    color={getEventColor(event.colorId)}
+                    onToggleIgnoreEvent={onToggleIgnoreEvent}
+                  />
                 </li>
               ))}
             </ul>

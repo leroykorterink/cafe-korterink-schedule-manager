@@ -86,6 +86,22 @@ class Calendar extends React.Component {
     throw error;
   };
 
+  handleToggleIgnoreEvent = eventId => {
+    const events = this.state.events.map(event => {
+      if (event.id !== eventId) {
+        return event;
+      }
+
+      // Update ignoreEvent property
+      return {
+        ...event,
+        ignoreEvent: !event.ignoreEvent
+      };
+    });
+
+    this.setState({ events });
+  };
+
   render() {
     const { events, isLoading } = this.state;
 
@@ -125,6 +141,7 @@ class Calendar extends React.Component {
           className={style.EventList}
           events={events}
           isLoading={isLoading}
+          onToggleIgnoreEvent={this.handleToggleIgnoreEvent}
         />
       </div>
     );

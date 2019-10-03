@@ -1,21 +1,12 @@
 @import "../../data/colors";
 
-.Badge {
-  display: inline-block;
-  width: 2ex;
-  padding-bottom: 2ex;
-  border-radius: 0.75ex;
-  background-color: #ccc;
-  transform: rotate(45deg);
-}
-
 .EventItem {
   display: flex;
   padding: 2rem 3rem;
   font-size: 1.4rem;
   border-top: 2px solid $colorTileBorder;
   color: $colorCopy;
-  transition: 0.2s ease-out all;
+  transition: all 0.2s ease-out;
 
   @media print {
     padding: 1rem 3rem;
@@ -24,68 +15,99 @@
   &:hover {
     background: $colorTileHoverBackground;
   }
+}
 
-  .row {
-    display: flex;
+.Badge {
+  display: inline-block;
+  width: 2ex;
+  padding-bottom: 2ex;
+  border-radius: 0.75ex;
+  background-color: #ccc;
+  transform: rotate(45deg);
+  transition: all 0.2s ease-out;
 
-    &:not(:last-child) {
-      margin-bottom: 0.5rem;
-    }
+  .ignored & {
+    opacity: 0.25;
+  }
+}
+
+.column:not(:first-child) {
+  margin-left: 2rem;
+}
+
+.eventDetails {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  transition: all 0.2s ease-out;
+
+  .ignored & {
+    opacity: 0.25;
   }
 
-  .column:not(:first-child) {
-    margin-left: 2rem;
+  @media print {
+    margin-left: 0 !important;
   }
+}
 
-  .eventDetails {
-    width: 100%;
+.badge {
+  font-size: 1.5rem;
 
-    @media print {
-      margin-left: 0 !important;
-    }
+  @media print {
+    display: none;
   }
+}
 
-  .badge {
-    font-size: 1.5rem;
+.summary {
+  position: relative;
+  font-size: 1em;
+  font-weight: bold;
+  color: currentColor;
+  text-decoration: none;
+  display: flex;
 
-    @media print {
-      display: none;
-    }
-  }
-
-  .summary {
+  span {
+    display: inline-block;
     position: relative;
-    font-size: 1em;
+  }
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.date {
+  color: $colorCopyMuted;
+  margin-top: 0.25rem;
+}
+
+.timeInformation {
+  display: flex;
+  margin-left: auto;
+  color: $colorCopyMuted;
+
+  .duration {
     font-weight: bold;
-    color: currentColor;
-    text-decoration: none;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    span {
-      display: inline-block;
-      position: relative;
-    }
-
-    &:hover {
-      text-decoration: underline;
-    }
+    margin-left: 2rem;
+    color: $colorCopy;
   }
+}
 
-  .date {
-    color: $colorCopyMuted;
+.toggleButton {
+  width: 2.5rem;
+  margin-left: 2rem;
+  outline: none;
+
+  @media print {
+    display: none;
   }
+}
 
-  .timeInformation {
-    display: flex;
-    margin-left: auto;
-    color: $colorCopyMuted;
+.toggleButtonIcon {
+  transition: all 0.2s ease-in-out;
+  fill: $colorRed;
 
-    .duration {
-      font-weight: bold;
-      margin-left: 2rem;
-      color: $colorCopy;
-    }
+  .ignored & {
+    fill: $colorGreen;
   }
 }
