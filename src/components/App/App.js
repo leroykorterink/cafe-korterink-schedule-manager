@@ -1,20 +1,18 @@
 /* global gapi */
 import React from "react";
-import { Route, Redirect, Switch, withRouter } from "react-router-dom";
+import { Redirect, Route, Switch, withRouter } from "react-router-dom";
 import config from "../../data/config";
 import RoutePaths from "../../enum/RoutePaths";
-import style from "./App.module.scss";
-
 import Header from "../Header";
-
-// Pages
 import Calendar from "../pages/Calendar";
 import CalenderSelection from "../pages/CalenderSelection";
+import Employees from "../pages/Employees";
 import Login from "../pages/Login";
+import style from "./App.module.scss";
 
 class App extends React.Component {
   state = {
-    gapiLoaded: false
+    gapiLoaded: false,
   };
 
   componentDidMount() {
@@ -25,13 +23,13 @@ class App extends React.Component {
     await gapi.client.init({
       clientId: config.gapi.clientId,
       discoveryDocs: config.gapi.discoveryDocs,
-      scope: config.gapi.scopes.join(" ")
+      scope: config.gapi.scopes.join(" "),
     });
 
     this.props.handleAuth2Init(gapi.auth2.getAuthInstance());
 
     this.setState({
-      gapiLoaded: true
+      gapiLoaded: true,
     });
   };
 
@@ -61,6 +59,7 @@ class App extends React.Component {
           />
 
           <Route exact path={RoutePaths.CALENDAR} component={Calendar} />
+          <Route exact path={RoutePaths.EMPLOYEES} component={Employees} />
 
           <Redirect to={RoutePaths.CALENDAR_SELECTION} />
         </Switch>

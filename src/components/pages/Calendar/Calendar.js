@@ -1,14 +1,14 @@
 /* global gapi */
-import { format, endOfMonth, startOfMonth } from "date-fns";
+import { endOfMonth, format, startOfMonth } from "date-fns";
 import React from "react";
 import { withRouter } from "react-router-dom";
-import config from "../../../data/config";
-import RoutePaths from "../../../enum/RoutePaths";
 import QueryFilterKeys from "../../../enum/QueryFilterKeys";
+import RoutePaths from "../../../enum/RoutePaths";
 import ColorContext from "../../ColorContext";
 import EventList from "../../EventList";
 import FilterInput from "../../FilterInput";
 import OverviewOptions from "../../OverviewOptions";
+import { employees } from "../Employees/Employees";
 import style from "./Calendar.module.scss";
 
 const endOfDay = "T23:59:59.999Z";
@@ -21,7 +21,7 @@ const startOfMonthDateTime = format(startOfMonth(now), "YYYY-MM-DD");
 class Calendar extends React.Component {
   state = {
     isLoading: true,
-    events: []
+    events: [],
   };
 
   get query() {
@@ -34,7 +34,7 @@ class Calendar extends React.Component {
       [QueryFilterKeys.TIME_MIN]: searchParams.get(QueryFilterKeys.TIME_MIN),
       [QueryFilterKeys.SEARCH]: searchParams.get(QueryFilterKeys.SEARCH),
       [QueryFilterKeys.SHOW_DELETED]: false,
-      [QueryFilterKeys.SINGLE_EVENTS]: true
+      [QueryFilterKeys.SINGLE_EVENTS]: true,
     };
   }
 
@@ -62,7 +62,7 @@ class Calendar extends React.Component {
 
       // Required
       calendarId: this.props.match.params.calendarId,
-      orderBy: "startTime"
+      orderBy: "startTime",
     };
 
     this.setState({ isLoading: true });
@@ -74,11 +74,11 @@ class Calendar extends React.Component {
 
     this.setState({
       isLoading: false,
-      events: response.result.items
+      events: response.result.items,
     });
   };
 
-  handleFetchEventError = error => {
+  handleFetchEventError = (error) => {
     // Redirect to calendar selection when calendar does not exist
     if (error.status === 404) {
       this.props.history.replace(RoutePaths.CALENDAR_SELECTION);
@@ -87,8 +87,8 @@ class Calendar extends React.Component {
     throw error;
   };
 
-  handleToggleIgnoreEvent = eventId => {
-    const events = this.state.events.map(event => {
+  handleToggleIgnoreEvent = (eventId) => {
+    const events = this.state.events.map((event) => {
       if (event.id !== eventId) {
         return event;
       }
@@ -96,7 +96,7 @@ class Calendar extends React.Component {
       // Update ignoreEvent property
       return {
         ...event,
-        ignoreEvent: !event.ignoreEvent
+        ignoreEvent: !event.ignoreEvent,
       };
     });
 
@@ -134,7 +134,7 @@ class Calendar extends React.Component {
             name={QueryFilterKeys.SEARCH}
             label="Zoeken"
             type="text"
-            suggestions={config.employeeSuggestions}
+            suggestions={Array.from(employees.values())}
             standalone
           />
         </OverviewOptions>
@@ -150,7 +150,7 @@ class Calendar extends React.Component {
   }
 }
 
-export default withRouter(props => (
+export default withRouter((props) => (
   <ColorContext>
     <Calendar {...props} />
   </ColorContext>

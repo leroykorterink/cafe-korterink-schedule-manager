@@ -2,17 +2,27 @@ import React from "react";
 import LoginButton from "../LoginButton";
 import { AuthContext } from "../AuthContext";
 import style from "./Header.module.scss";
+import Button from "../general/Button";
+import RoutePaths from "../../enum/RoutePaths";
 
 const Header = () => (
   <header className={style.Header}>
     <div className={style.wrapper}>
-      <h1 className={style.logo}>Planning</h1>
+      <Button to="/" className={style.logo}>
+        <h1>Planning</h1>
+      </Button>
 
-      <AuthContext.Consumer>
-        {({ auth2 }) => (
-          <LoginButton auth2={auth2} className={style.loginButton} />
-        )}
-      </AuthContext.Consumer>
+      <div className={style.buttons}>
+        <Button className={style.button} to={RoutePaths.EMPLOYEES}>
+          Personeel
+        </Button>
+
+        <AuthContext.Consumer>
+          {({ auth2 }) => (
+            <LoginButton auth2={auth2} className={style.button} />
+          )}
+        </AuthContext.Consumer>
+      </div>
     </div>
   </header>
 );

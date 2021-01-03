@@ -2,7 +2,8 @@ const RoutePaths = {
   HOME: "/",
   CALENDAR_SELECTION: "/calendars",
   CALENDAR: "/calendars/:calendarId",
-  LOGIN: "/login"
+  LOGIN: "/login",
+  EMPLOYEES: "/employees",
 };
 
 export const LoginSuccessPath = RoutePaths.HOME;
