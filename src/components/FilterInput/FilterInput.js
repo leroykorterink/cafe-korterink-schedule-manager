@@ -14,7 +14,7 @@ class TextFilter extends React.Component {
       "";
 
     this.state = {
-      value: defaultValue
+      value: defaultValue,
     };
 
     this.updateSearchQuery();
@@ -33,21 +33,33 @@ class TextFilter extends React.Component {
     history.replace({ search: newPath.search });
   }
 
-  handleBlur = e => {
+  handleBlur = (e) => {
     this.setState(
       {
-        value: e.target.value
+        value: e.target.value,
       },
       this.updateSearchQuery
     );
   };
 
-  handleKeyDown = e => {
+  handleKeyDown = (e) => {
     if (e.key !== KeyNames.ENTER) {
       return;
     }
 
     e.target.blur();
+  };
+
+  handleInput = (inputEvent) => {
+    // inputType is undefined when value is selected from datalist
+    if (
+      inputEvent.nativeEvent.inputType != null ||
+      inputEvent.target.type !== "text"
+    ) {
+      return;
+    }
+
+    inputEvent.target.blur();
   };
 
   render() {
@@ -60,6 +72,7 @@ class TextFilter extends React.Component {
         defaultValue={value}
         onBlur={this.handleBlur}
         onKeyDown={this.handleKeyDown}
+        onInput={this.handleInput}
       />
     );
   }

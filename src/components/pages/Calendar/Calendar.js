@@ -111,7 +111,7 @@ class Calendar extends React.Component {
         <OverviewOptions
           backLink={RoutePaths.CALENDAR_SELECTION}
           className={style.OverviewOptions}
-          title="Kalendar"
+          title="Kalender"
         >
           <span>
             <FilterInput

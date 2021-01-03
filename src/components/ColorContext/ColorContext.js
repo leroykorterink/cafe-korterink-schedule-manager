@@ -1,8 +1,9 @@
 /* global gapi */
 import React from "react";
+import style from "./ColorContext.module.scss";
 
 export const ColorContext = React.createContext({
-  getColor: () => ({})
+  getColor: () => ({}),
 });
 
 const EMPTY_OBJECT = {};
@@ -15,12 +16,12 @@ class ColorContextComponent extends React.Component {
       calendar: null,
       event: null,
       isLoading: true,
-      hasLoadedColors: false
+      hasLoadedColors: false,
     };
 
     this.contextValue = {
       getCalendarColor: this.getCalendarColor,
-      getEventColor: this.getEventColor
+      getEventColor: this.getEventColor,
     };
   }
 
@@ -34,14 +35,14 @@ class ColorContextComponent extends React.Component {
     this.setState({
       ...response.result,
       isLoading: false,
-      didLoad: true
+      didLoad: true,
     });
   }
 
-  getCalendarColor = colorId =>
+  getCalendarColor = (colorId) =>
     this.state.calendar ? this.state.calendar[colorId] : EMPTY_OBJECT;
 
-  getEventColor = colorId =>
+  getEventColor = (colorId) =>
     this.state.event ? this.state.event[colorId] : EMPTY_OBJECT;
 
   render() {
@@ -49,7 +50,7 @@ class ColorContextComponent extends React.Component {
     const { isLoading } = this.state;
 
     if (isLoading) {
-      return "Loading data";
+      return <div className={style.loader}>Loading data</div>;
     }
 
     return (

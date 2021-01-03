@@ -13,6 +13,10 @@ const Header = () => (
       </Button>
 
       <div className={style.buttons}>
+        <Button className={style.button} to={RoutePaths.CALENDAR}>
+          Kalenders
+        </Button>
+
         <Button className={style.button} to={RoutePaths.EMPLOYEES}>
           Personeel
         </Button>
